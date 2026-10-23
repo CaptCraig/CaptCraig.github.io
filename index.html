@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Capt. Craig's Workshop</title>
+<meta name="description" content="Games, animations and experiments by Craig H. Nelson.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #14273e;
+    --navy-2: #1d3a5c;
+    --brass: #c9973f;
+    --paper: #f4efe3;
+    --card: #fffdf8;
+    --ink: #1e2a36;
+    --muted: #5d6b78;
+    --line: #d9cfb8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    color: var(--ink);
+    background-color: var(--paper);
+    /* faint chart-paper grid */
+    background-image:
+      linear-gradient(rgba(20,39,62,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,39,62,.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+    min-height: 100vh;
+  }
+
+  /* ---------- Banner ---------- */
+  header {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: #fff;
+    padding: calc(48px + env(safe-area-inset-top)) 20px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header .rose {
+    position: absolute; right: -60px; top: -60px;
+    width: 280px; height: 280px; opacity: .12;
+  }
+  header h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    margin: 0 0 10px;
+    letter-spacing: .5px;
+  }
+  header h1 span { color: var(--brass); }
+  header p {
+    margin: 0 auto; max-width: 560px;
+    font-size: clamp(1rem, 2.6vw, 1.2rem);
+    color: #d6e0ea;
+  }
+  header .rule {
+    width: 80px; height: 3px; background: var(--brass);
+    margin: 18px auto 0; border-radius: 2px;
+  }
+
+  /* ---------- Cards ---------- */
+  main {
+    max-width: 1100px;
+    margin: -28px auto 0;
+    padding: 0 16px 48px;
+    position: relative;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+  }
+  .card {
+    display: flex; flex-direction: column;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 6px rgba(20,39,62,.08);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  a.card:hover, a.card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(20,39,62,.18);
+    outline: none;
+  }
+  a.card:focus-visible { border-color: var(--brass); }
+  .pic {
+    aspect-ratio: 16 / 10;
+    display: block; width: 100%;
+    border-bottom: 1px solid var(--line);
+  }
+  .body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
+  .body h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    margin: 0 0 6px;
+    color: var(--navy);
+  }
+  .body p { margin: 0; color: var(--muted); font-size: 1.02rem; line-height: 1.4; }
+  .go {
+    margin-top: auto; padding-top: 14px;
+    font-weight: 600; color: var(--brass);
+    font-size: .95rem;
+  }
+  a.card:hover .go { text-decoration: underline; }
+
+  .card.soon { opacity: .62; box-shadow: none; border-style: dashed; }
+  .card.soon .go { color: var(--muted); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    text-align: center;
+    padding: 24px 16px calc(32px + env(safe-area-inset-bottom));
+    color: var(--muted);
+    font-size: .95rem;
+    border-top: 1px solid var(--line);
+  }
+  footer a { color: var(--navy-2); }
+
+  @media (max-width: 400px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <!-- decorative compass rose -->
+  <svg class="rose" viewBox="0 0 200 200" aria-hidden="true">
+    <g fill="#fff">
+      <polygon points="100,0 112,100 100,200 88,100"/>
+      <polygon points="0,100 100,88 200,100 100,112"/>
+      <polygon points="30,30 104,96 170,170 96,104" opacity=".6"/>
+      <polygon points="170,30 104,104 30,170 96,96" opacity=".6"/>
+    </g>
+    <circle cx="100" cy="100" r="70" fill="none" stroke="#fff" stroke-width="3"/>
+  </svg>
+  <h1>Capt. Craig's <span>Workshop</span></h1>
+  <p>Games, animations and experiments, built for curious minds of every age.</p>
+  <div class="rule"></div>
+</header>
+
+<main>
+  <div class="grid">
+
+    <!-- ===== Wordle Solitaire ===== -->
+    <a class="card" href="/WS1/">
+      <svg class="pic" viewBox="0 0 320 200" role="img" aria-label="Rows of colored letter tiles">
+        <rect width="320" height="200" fill="#eef1f4"/>
+        <g font-family="Arial, sans-serif" font-weight="700" font-size="26" text-anchor="middle" fill="#fff">
+          <!-- row 1 -->
+          <rect x="62"  y="28" width="36" height="36" rx="4" fill="#787c7e"/><text x="80"  y="56">C</text>
+          <rect x="104" y="28" width="36" height="36" rx="4" fill="#c9b458"/><text x="122" y="56">R</text>
+          <rect x="146" y="28" width="36" height="36" rx="4" fill="#787c7e"/><text x="164" y="56">A</text>
+          <rect x="188" y="28" width="36" height="36" rx="4" fill="#787c7e"/><text x="206" y="56">N</text>
+          <rect x="230" y="28" width="36" height="36" rx="4" fill="#6aaa64"/><text x="248" y="56">E</text>
+          <!-- row 2 -->
+          <rect x="62"  y="70" width="36" height="36" rx="4" fill="#c9b458"/><text x="80"  y="98">S</text>
+          <rect x="104" y="70" width="36" height="36" rx="4" fill="#6aaa64"/><text x="122" y="98">T</text>
+          <rect x="146" y="70" width="36" height="36" rx="4" fill="#787c7e"/><text x="164" y="98">O</text>
+          <rect x="188" y="70" width="36" height="36" rx="4" fill="#6aaa64"/><text x="206" y="98">R</text>
+          <rect x="230" y="70" width="36" height="36" rx="4" fill="#6aaa64"/><text x="248" y="98">E</text>
+          <!-- row 3 -->
+          <rect x="62"  y="112" width="36" height="36" rx="4" fill="#6aaa64"/><text x="80"  y="140">S</text>
+          <rect x="104" y="112" width="36" height="36" rx="4" fill="#6aaa64"/><text x="122" y="140">T</text>
+          <rect x="146" y="112" width="36" height="36" rx="4" fill="#6aaa64"/><text x="164" y="140">I</text>
+          <rect x="188" y="112" width="36" height="36" rx="4" fill="#6aaa64"/><text x="206" y="140">R</text>
+          <rect x="230" y="112" width="36" height="36" rx="4" fill="#6aaa64"/><text x="248" y="140">E</text>
+        </g>
+        <!-- empty row -->
+        <g fill="none" stroke="#c4c9ce" stroke-width="2">
+          <rect x="62"  y="154" width="36" height="36" rx="4"/>
+          <rect x="104" y="154" width="36" height="36" rx="4"/>
+          <rect x="146" y="154" width="36" height="36" rx="4"/>
+          <rect x="188" y="154" width="36" height="36" rx="4"/>
+          <rect x="230" y="154" width="36" height="36" rx="4"/>
+        </g>
+      </svg>
+      <div class="body">
+        <h2>Wordle Solitaire</h2>
+        <p>A word game you play against yourself.</p>
+        <div class="go">Play →</div>
+      </div>
+    </a>
+
+    <!-- ===== Solar Plane ===== -->
+    <a class="card" href="/sp/">
+      <svg class="pic" viewBox="0 0 320 200" role="img" aria-label="A small plane flying over the earth along the day-night line">
+        <rect width="320" height="200" fill="#0b1626"/>
+        <!-- stars -->
+        <g fill="#fff">
+          <circle cx="30" cy="30" r="1.2"/><circle cx="60" cy="160" r="1"/><circle cx="280" cy="40" r="1.3"/>
+          <circle cx="250" cy="170" r="1"/><circle cx="20" cy="110" r="1"/><circle cx="300" cy="120" r="1.1"/>
+        </g>
+        <!-- sun -->
+        <circle cx="285" cy="100" r="16" fill="#ffd257"/>
+        <g stroke="#ffd257" stroke-width="2" stroke-linecap="round">
+          <line x1="285" y1="72" x2="285" y2="78"/><line x1="285" y1="122" x2="285" y2="128"/>
+          <line x1="257" y1="100" x2="263" y2="100"/><line x1="307" y1="100" x2="313" y2="100"/>
+        </g>
+        <defs>
+          <clipPath id="globe"><circle cx="150" cy="100" r="78"/></clipPath>
+        </defs>
+        <!-- earth: night half, day half -->
+        <g clip-path="url(#globe)">
+          <rect x="60" y="10" width="200" height="180" fill="#173252"/>
+          <rect x="150" y="10" width="110" height="180" fill="#3a86c8"/>
+          <!-- simple land shapes -->
+          <path d="M120 60 q20 -15 40 -2 q10 18 -6 30 q-20 8 -30 -6 z" fill="#2d6b3a" opacity=".9"/>
+          <path d="M160 110 q25 -6 35 14 q-4 26 -26 30 q-16 -10 -9 -44 z" fill="#4c9a52"/>
+          <path d="M95 115 q15 5 12 22 q-12 6 -20 -6 z" fill="#244f30"/>
+          <!-- latitude lines -->
+          <g fill="none" stroke="#ffffff" stroke-opacity=".18">
+            <ellipse cx="150" cy="100" rx="78" ry="24"/>
+            <ellipse cx="150" cy="100" rx="40" ry="78"/>
+          </g>
+        </g>
+        <!-- terminator -->
+        <line x1="150" y1="18" x2="150" y2="182" stroke="#ffb347" stroke-width="2" stroke-dasharray="5 4"/>
+        <circle cx="150" cy="100" r="78" fill="none" stroke="#9fc3e6" stroke-width="1.5"/>
+        <!-- plane, heading south along the line -->
+        <g transform="translate(150 52) rotate(180)">
+          <path d="M0 -12 L3 -2 L14 2 L14 5 L3 3 L2 10 L6 13 L6 15 L0 13.5 L-6 15 L-6 13 L-2 10 L-3 3 L-14 5 L-14 2 L-3 -2 Z" fill="#fff"/>
+        </g>
+      </svg>
+      <div class="body">
+        <h2>Solar Plane: Pole to Pole</h2>
+        <p>Can a solar plane outrun the sunset?</p>
+        <div class="go">Fly →</div>
+      </div>
+    </a>
+
+    <!-- ===== Pi for kids ===== -->
+    <a class="card" href="/pi/">
+      <svg class="pic" viewBox="0 0 320 200" role="img" aria-label="A pizza cut into slices next to the symbol pi">
+        <rect width="320" height="200" fill="#fff4e0"/>
+        <!-- pizza -->
+        <circle cx="110" cy="100" r="70" fill="#d9903d"/>
+        <circle cx="110" cy="100" r="60" fill="#f2c94c"/>
+        <g fill="#c0392b">
+          <circle cx="90" cy="75" r="7"/><circle cx="130" cy="70" r="7"/><circle cx="140" cy="110" r="7"/>
+          <circle cx="100" cy="130" r="7"/><circle cx="75" cy="105" r="7"/><circle cx="115" cy="100" r="6"/>
+        </g>
+        <g stroke="#a86a24" stroke-width="2.5">
+          <line x1="110" y1="30" x2="110" y2="170"/>
+          <line x1="40" y1="100" x2="180" y2="100"/>
+          <line x1="60.5" y1="50.5" x2="159.5" y2="149.5"/>
+          <line x1="159.5" y1="50.5" x2="60.5" y2="149.5"/>
+        </g>
+        <!-- pi symbol -->
+        <text x="245" y="128" font-family="Georgia, serif" font-size="100" font-weight="700" text-anchor="middle" fill="#14273e">π</text>
+        <!-- random dots -->
+        <g fill="#1d3a5c" opacity=".55">
+          <circle cx="205" cy="40" r="3"/><circle cx="225" cy="55" r="3"/><circle cx="270" cy="38" r="3"/>
+          <circle cx="292" cy="62" r="3"/><circle cx="210" cy="160" r="3"/><circle cx="285" cy="165" r="3"/>
+          <circle cx="250" cy="175" r="3"/>
+        </g>
+      </svg>
+      <div class="body">
+        <h2>Seven Ways to Make π</h2>
+        <p>Pizza, toothpicks and random dots, for kids.</p>
+        <div class="go">Explore →</div>
+      </div>
+    </a>
+
+    <!-- ===== Coming soon (copy this block for each new project) ===== -->
+    <div class="card soon" aria-disabled="true">
+      <svg class="pic" viewBox="0 0 320 200" role="img" aria-label="A workbench sketch">
+        <rect width="320" height="200" fill="#efe9dc"/>
+        <g fill="none" stroke="#9aa6b2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="160" cy="100" r="46" stroke-dasharray="6 6"/>
+          <path d="M160 60 v80 M120 100 h80"/>
+          <path d="M160 60 l-8 14 h16 z" fill="#9aa6b2"/>
+        </g>
+        <text x="160" y="178" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="16" fill="#7c8894">on the workbench</text>
+      </svg>
+      <div class="body">
+        <h2>Coming soon</h2>
+        <p>A new project is taking shape.</p>
+        <div class="go">Stay tuned</div>
+      </div>
+    </div>
+
+    <div class="card soon" aria-disabled="true">
+      <svg class="pic" viewBox="0 0 320 200" role="img" aria-label="A workbench sketch">
+        <rect width="320" height="200" fill="#efe9dc"/>
+        <g fill="none" stroke="#9aa6b2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M110 140 l50 -80 l50 80 z" stroke-dasharray="6 6"/>
+          <circle cx="160" cy="112" r="10"/>
+        </g>
+        <text x="160" y="178" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="16" fill="#7c8894">on the workbench</text>
+      </svg>
+      <div class="body">
+        <h2>Coming soon</h2>
+        <p>Another experiment in progress.</p>
+        <div class="go">Stay tuned</div>
+      </div>
+    </div>
+
+    <div class="card soon" aria-disabled="true">
+      <svg class="pic" viewBox="0 0 320 200" role="img" aria-label="A workbench sketch">
+        <rect width="320" height="200" fill="#efe9dc"/>
+        <g fill="none" stroke="#9aa6b2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="115" y="60" width="90" height="80" rx="6" stroke-dasharray="6 6"/>
+          <path d="M130 120 l20 -25 l18 18 l22 -30"/>
+        </g>
+        <text x="160" y="178" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="16" fill="#7c8894">on the workbench</text>
+      </svg>
+      <div class="body">
+        <h2>Coming soon</h2>
+        <p>Watch this space.</p>
+        <div class="go">Stay tuned</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  © 2026 Craig H. Nelson · <a href="https://github.com/CaptCraig">GitHub</a>
+</footer>
+
+</body>
+</html>
