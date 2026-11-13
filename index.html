@@ -148,8 +148,6 @@
     box-shadow: 0 1px 3px rgba(20,39,62,.25);
   }
 
-  .lifepic { height: auto; background: #0e1d30; }
-
   .card.soon { opacity: .62; box-shadow: none; border-style: dashed; }
   .card.soon .go { color: var(--muted); }
 
@@ -338,10 +336,20 @@
 
     <!-- ===== Game of Life ===== -->
     <a class="card" href="/life/">
-      <canvas class="pic lifepic" id="lifepic" width="576" height="360" role="img" aria-label="A live Game of Life: patterns grow, collide and throw off gliders"></canvas>
+<svg class="pic" viewBox="0 0 320 200" role="img" aria-label="A Gosper glider gun firing a stream of gliders, with the caption: Gliders, guns and spaceships on an endless board. Don't miss the Draw tool!">
+        <rect width="320" height="200" fill="#0e1d30"/>
+        <!-- a real Gosper gun at generation 230, coloured by cell age -->
+        <g><path fill="rgba(201,151,63,0.07)" d="M256.67 0.00h2.73v2.73h-2.73zM96.67 10.00h2.73v2.73h-2.73zM96.67 13.33h2.73v2.73h-2.73zM70.00 16.67h2.73v2.73h-2.73zM46.67 23.33h2.73v2.73h-2.73zM73.33 23.33h2.73v2.73h-2.73zM46.67 26.67h2.73v2.73h-2.73zM96.67 26.67h2.73v2.73h-2.73zM46.67 30.00h2.73v2.73h-2.73zM70.00 30.00h2.73v2.73h-2.73zM96.67 30.00h2.73v2.73h-2.73zM80.00 33.33h2.73v2.73h-2.73zM80.00 36.67h2.73v2.73h-2.73zM83.33 36.67h2.73v2.73h-2.73zM106.67 50.00h2.73v2.73h-2.73zM130.00 76.67h2.73v2.73h-2.73zM156.67 100.00h2.73v2.73h-2.73zM180.00 126.67h2.73v2.73h-2.73zM206.67 150.00h2.73v2.73h-2.73zM230.00 176.67h2.73v2.73h-2.73z"/><path fill="rgba(201,151,63,0.13)" d="M260.00 0.00h2.73v2.73h-2.73zM70.00 20.00h2.73v2.73h-2.73zM73.33 20.00h2.73v2.73h-2.73zM40.00 23.33h2.73v2.73h-2.73zM70.00 26.67h2.73v2.73h-2.73zM83.33 26.67h2.73v2.73h-2.73zM40.00 30.00h2.73v2.73h-2.73zM76.67 36.67h2.73v2.73h-2.73zM110.00 50.00h2.73v2.73h-2.73zM130.00 80.00h2.73v2.73h-2.73zM160.00 100.00h2.73v2.73h-2.73zM180.00 130.00h2.73v2.73h-2.73zM210.00 150.00h2.73v2.73h-2.73zM230.00 180.00h2.73v2.73h-2.73z"/><path fill="rgba(201,151,63,0.18)" d="M256.67 3.33h2.73v2.73h-2.73zM100.00 10.00h2.73v2.73h-2.73zM100.00 13.33h2.73v2.73h-2.73zM43.33 20.00h2.73v2.73h-2.73zM46.67 20.00h2.73v2.73h-2.73zM43.33 23.33h2.73v2.73h-2.73zM50.00 23.33h2.73v2.73h-2.73zM70.00 23.33h2.73v2.73h-2.73zM76.67 26.67h2.73v2.73h-2.73zM80.00 26.67h2.73v2.73h-2.73zM100.00 26.67h2.73v2.73h-2.73zM43.33 30.00h2.73v2.73h-2.73zM50.00 30.00h2.73v2.73h-2.73zM73.33 30.00h2.73v2.73h-2.73zM76.67 30.00h2.73v2.73h-2.73zM80.00 30.00h2.73v2.73h-2.73zM100.00 30.00h2.73v2.73h-2.73zM43.33 33.33h2.73v2.73h-2.73zM46.67 33.33h2.73v2.73h-2.73zM76.67 33.33h2.73v2.73h-2.73zM106.67 53.33h2.73v2.73h-2.73zM133.33 76.67h2.73v2.73h-2.73zM156.67 103.33h2.73v2.73h-2.73zM183.33 126.67h2.73v2.73h-2.73zM206.67 153.33h2.73v2.73h-2.73zM233.33 176.67h2.73v2.73h-2.73z"/><path fill="rgba(201,151,63,0.29)" d="M260.00 3.33h2.73v2.73h-2.73zM33.33 26.67h2.73v2.73h-2.73zM36.67 26.67h2.73v2.73h-2.73zM53.33 26.67h2.73v2.73h-2.73zM83.33 30.00h2.73v2.73h-2.73zM110.00 53.33h2.73v2.73h-2.73zM133.33 80.00h2.73v2.73h-2.73zM160.00 103.33h2.73v2.73h-2.73zM183.33 130.00h2.73v2.73h-2.73zM210.00 153.33h2.73v2.73h-2.73zM233.33 180.00h2.73v2.73h-2.73z"/><path fill="rgba(201,151,63,0.34)" d="M263.33 3.33h2.73v2.73h-2.73zM110.00 16.67h2.73v2.73h-2.73zM110.00 20.00h2.73v2.73h-2.73zM110.00 23.33h2.73v2.73h-2.73zM50.00 26.67h2.73v2.73h-2.73zM83.33 33.33h2.73v2.73h-2.73zM113.33 53.33h2.73v2.73h-2.73zM133.33 83.33h2.73v2.73h-2.73zM163.33 103.33h2.73v2.73h-2.73zM183.33 133.33h2.73v2.73h-2.73zM213.33 153.33h2.73v2.73h-2.73zM233.33 183.33h2.73v2.73h-2.73z"/><path fill="rgba(201,151,63,0.23)" d="M256.67 6.67h2.73v2.73h-2.73zM103.33 10.00h2.73v2.73h-2.73zM46.67 16.67h2.73v2.73h-2.73zM40.00 20.00h2.73v2.73h-2.73zM43.33 26.67h2.73v2.73h-2.73zM86.67 26.67h2.73v2.73h-2.73zM103.33 30.00h2.73v2.73h-2.73zM40.00 33.33h2.73v2.73h-2.73zM73.33 33.33h2.73v2.73h-2.73zM46.67 36.67h2.73v2.73h-2.73zM106.67 56.67h2.73v2.73h-2.73zM136.67 76.67h2.73v2.73h-2.73zM156.67 106.67h2.73v2.73h-2.73zM186.67 126.67h2.73v2.73h-2.73zM206.67 156.67h2.73v2.73h-2.73zM236.67 176.67h2.73v2.73h-2.73z"/><path fill="rgba(201,151,63,0.40)" d="M260.00 6.67h2.73v2.73h-2.73zM263.33 10.00h2.73v2.73h-2.73zM116.67 16.67h2.73v2.73h-2.73zM56.67 20.00h2.73v2.73h-2.73zM116.67 20.00h2.73v2.73h-2.73zM26.67 23.33h2.73v2.73h-2.73zM53.33 23.33h2.73v2.73h-2.73zM56.67 23.33h2.73v2.73h-2.73zM116.67 23.33h2.73v2.73h-2.73zM23.33 26.67h2.73v2.73h-2.73zM30.00 26.67h2.73v2.73h-2.73zM56.67 26.67h2.73v2.73h-2.73zM53.33 30.00h2.73v2.73h-2.73zM56.67 30.00h2.73v2.73h-2.73zM86.67 30.00h2.73v2.73h-2.73zM56.67 33.33h2.73v2.73h-2.73zM90.00 33.33h2.73v2.73h-2.73zM110.00 56.67h2.73v2.73h-2.73zM113.33 60.00h2.73v2.73h-2.73zM136.67 80.00h2.73v2.73h-2.73zM140.00 83.33h2.73v2.73h-2.73zM160.00 106.67h2.73v2.73h-2.73zM163.33 110.00h2.73v2.73h-2.73zM186.67 130.00h2.73v2.73h-2.73zM190.00 133.33h2.73v2.73h-2.73zM210.00 156.67h2.73v2.73h-2.73zM213.33 160.00h2.73v2.73h-2.73zM236.67 180.00h2.73v2.73h-2.73zM240.00 183.33h2.73v2.73h-2.73z"/><path fill="#fff4cf" d="M263.33 6.67h2.73v2.73h-2.73zM106.67 10.00h2.73v2.73h-2.73zM270.00 10.00h2.73v2.73h-2.73zM103.33 13.33h2.73v2.73h-2.73zM100.00 16.67h2.73v2.73h-2.73zM53.33 20.00h2.73v2.73h-2.73zM120.00 20.00h2.73v2.73h-2.73zM23.33 23.33h2.73v2.73h-2.73zM60.00 23.33h2.73v2.73h-2.73zM100.00 23.33h2.73v2.73h-2.73zM26.67 26.67h2.73v2.73h-2.73zM60.00 26.67h2.73v2.73h-2.73zM66.67 26.67h2.73v2.73h-2.73zM103.33 26.67h2.73v2.73h-2.73zM60.00 30.00h2.73v2.73h-2.73zM106.67 30.00h2.73v2.73h-2.73zM26.67 33.33h2.73v2.73h-2.73zM30.00 33.33h2.73v2.73h-2.73zM33.33 33.33h2.73v2.73h-2.73zM53.33 33.33h2.73v2.73h-2.73zM86.67 33.33h2.73v2.73h-2.73zM90.00 40.00h2.73v2.73h-2.73zM113.33 56.67h2.73v2.73h-2.73zM120.00 60.00h2.73v2.73h-2.73zM136.67 83.33h2.73v2.73h-2.73zM140.00 90.00h2.73v2.73h-2.73zM163.33 106.67h2.73v2.73h-2.73zM170.00 110.00h2.73v2.73h-2.73zM186.67 133.33h2.73v2.73h-2.73zM190.00 140.00h2.73v2.73h-2.73zM213.33 156.67h2.73v2.73h-2.73zM220.00 160.00h2.73v2.73h-2.73zM236.67 183.33h2.73v2.73h-2.73zM240.00 190.00h2.73v2.73h-2.73z"/><path fill="rgba(201,151,63,0.45)" d="M266.67 6.67h2.73v2.73h-2.73zM260.00 10.00h2.73v2.73h-2.73zM106.67 13.33h2.73v2.73h-2.73zM110.00 13.33h2.73v2.73h-2.73zM113.33 13.33h2.73v2.73h-2.73zM103.33 16.67h2.73v2.73h-2.73zM106.67 16.67h2.73v2.73h-2.73zM113.33 16.67h2.73v2.73h-2.73zM23.33 20.00h2.73v2.73h-2.73zM60.00 20.00h2.73v2.73h-2.73zM103.33 20.00h2.73v2.73h-2.73zM106.67 20.00h2.73v2.73h-2.73zM33.33 23.33h2.73v2.73h-2.73zM103.33 23.33h2.73v2.73h-2.73zM106.67 23.33h2.73v2.73h-2.73zM113.33 23.33h2.73v2.73h-2.73zM106.67 26.67h2.73v2.73h-2.73zM110.00 26.67h2.73v2.73h-2.73zM113.33 26.67h2.73v2.73h-2.73zM90.00 30.00h2.73v2.73h-2.73zM60.00 33.33h2.73v2.73h-2.73zM86.67 36.67h2.73v2.73h-2.73zM116.67 56.67h2.73v2.73h-2.73zM110.00 60.00h2.73v2.73h-2.73zM140.00 80.00h2.73v2.73h-2.73zM136.67 86.67h2.73v2.73h-2.73zM166.67 106.67h2.73v2.73h-2.73zM160.00 110.00h2.73v2.73h-2.73zM190.00 130.00h2.73v2.73h-2.73zM186.67 136.67h2.73v2.73h-2.73zM216.67 156.67h2.73v2.73h-2.73zM210.00 160.00h2.73v2.73h-2.73zM240.00 180.00h2.73v2.73h-2.73zM236.67 186.67h2.73v2.73h-2.73z"/><path fill="#f6d98e" d="M110.00 10.00h2.73v2.73h-2.73zM266.67 10.00h2.73v2.73h-2.73zM116.67 13.33h2.73v2.73h-2.73zM263.33 13.33h2.73v2.73h-2.73zM266.67 13.33h2.73v2.73h-2.73zM53.33 16.67h2.73v2.73h-2.73zM120.00 16.67h2.73v2.73h-2.73zM100.00 20.00h2.73v2.73h-2.73zM113.33 20.00h2.73v2.73h-2.73zM123.33 20.00h2.73v2.73h-2.73zM63.33 23.33h2.73v2.73h-2.73zM120.00 23.33h2.73v2.73h-2.73zM40.00 26.67h2.73v2.73h-2.73zM63.33 26.67h2.73v2.73h-2.73zM116.67 26.67h2.73v2.73h-2.73zM23.33 30.00h2.73v2.73h-2.73zM26.67 30.00h2.73v2.73h-2.73zM30.00 30.00h2.73v2.73h-2.73zM63.33 30.00h2.73v2.73h-2.73zM110.00 30.00h2.73v2.73h-2.73zM93.33 33.33h2.73v2.73h-2.73zM53.33 36.67h2.73v2.73h-2.73zM90.00 36.67h2.73v2.73h-2.73zM93.33 36.67h2.73v2.73h-2.73zM116.67 60.00h2.73v2.73h-2.73zM113.33 63.33h2.73v2.73h-2.73zM116.67 63.33h2.73v2.73h-2.73zM143.33 83.33h2.73v2.73h-2.73zM140.00 86.67h2.73v2.73h-2.73zM143.33 86.67h2.73v2.73h-2.73zM166.67 110.00h2.73v2.73h-2.73zM163.33 113.33h2.73v2.73h-2.73zM166.67 113.33h2.73v2.73h-2.73zM193.33 133.33h2.73v2.73h-2.73zM190.00 136.67h2.73v2.73h-2.73zM193.33 136.67h2.73v2.73h-2.73zM216.67 160.00h2.73v2.73h-2.73zM213.33 163.33h2.73v2.73h-2.73zM216.67 163.33h2.73v2.73h-2.73zM243.33 183.33h2.73v2.73h-2.73zM240.00 186.67h2.73v2.73h-2.73zM243.33 186.67h2.73v2.73h-2.73z"/><path fill="#e7b75a" d="M50.00 16.67h2.73v2.73h-2.73zM50.00 20.00h2.73v2.73h-2.73zM36.67 23.33h2.73v2.73h-2.73zM33.33 30.00h2.73v2.73h-2.73zM36.67 30.00h2.73v2.73h-2.73zM50.00 33.33h2.73v2.73h-2.73zM50.00 36.67h2.73v2.73h-2.73z"/><path fill="#9fb98a" d="M133.33 16.67h2.73v2.73h-2.73zM133.33 20.00h2.73v2.73h-2.73z"/><path fill="#4f9fae" d="M136.67 16.67h2.73v2.73h-2.73zM136.67 20.00h2.73v2.73h-2.73zM20.00 23.33h2.73v2.73h-2.73zM20.00 26.67h2.73v2.73h-2.73z"/></g>
+        <!-- caption panel -->
+        <rect x="10" y="120" width="300" height="70" rx="10" fill="#0e1d30" fill-opacity=".8" stroke="#c9973f" stroke-opacity=".55"/>
+        <text x="24" y="143" font-family="Fraunces, Georgia, serif" font-weight="600" font-size="15.5" fill="#f4efe3">Gliders, guns and spaceships</text>
+        <text x="24" y="161" font-family="Fraunces, Georgia, serif" font-weight="600" font-size="15.5" fill="#f4efe3">on an endless board.</text>
+        <text x="24" y="180" font-family="Source Sans 3, system-ui, sans-serif" font-weight="600" font-size="13.5" fill="#e0b45c">Don’t miss the Draw tool! ✎</text>
+        <g fill="#e0b45c"><rect x="261" y="140" width="4.4" height="4.4"/><rect x="266" y="145" width="4.4" height="4.4"/><rect x="256" y="150" width="4.4" height="4.4"/><rect x="261" y="150" width="4.4" height="4.4"/><rect x="266" y="150" width="4.4" height="4.4"/><rect x="281" y="158" width="4.4" height="4.4"/><rect x="286" y="163" width="4.4" height="4.4"/><rect x="276" y="168" width="4.4" height="4.4"/><rect x="281" y="168" width="4.4" height="4.4"/><rect x="286" y="168" width="4.4" height="4.4"/></g>
+      </svg>
       <div class="body">
         <h2>Game of Life</h2>
-        <p>Gliders, guns and spaceships on an endless board.</p>
+        <p>A fascinating 1970 classic: three simple rules, yet powerful enough to build a computer.</p>
         <div class="go">Watch →</div>
       </div>
     </a>
@@ -396,129 +404,6 @@
   © 2026 Craig H. Nelson · <a href="https://github.com/CaptCraig">GitHub</a>
 </footer>
 
-<!-- Live Game of Life in the card picture -->
-<script>
-(function () {
-  const cv = document.getElementById('lifepic');
-  if (!cv || !cv.getContext) return;
-  const ctx = cv.getContext('2d');
-  const W = 96, H = 60, C = 6;                  // board size (wraps at the edges); 6 canvas px per cell
-  const N = W * H;
-  let cur = new Uint8Array(N), nxt = new Uint8Array(N);
-  const age = new Uint16Array(N);               // generations alive
-  const glow = new Float32Array(N);             // fading trail where a cell just died
-  // Each pattern: where to put it (x, y, turned 180°?) and, for gentle mode, how far into its life to start
-  const GUN = '24bo$22bobo$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o$2o8bo3bob2o4bobo$10bo5bo7bo$11bo3bo$12b2o!';
-  const ACORN = 'bo5b$3bo3b$2o2b3o!';
-  const SEEDS = [
-    { name: 'acorn',         rle: ACORN, at: [[45, 28]],                 warm: 160 },
-    { name: 'R-pentomino',   rle: 'b2o$2o$bo!', at: [[45, 28]],          warm: 160 },
-    { name: 'two acorns',    rle: ACORN, at: [[24, 18], [64, 38]],       warm: 160 },
-    { name: 'Gosper gun',    rle: GUN,   at: [[6, 5]],                   warm: 160 },
-    { name: 'duelling guns', rle: GUN,   at: [[4, 4], [46, 36, true]],   warm: 60 },   // streams meet head-on near gen 115
-    { name: 'switch engine', rle: '6bob$4bob2o$4bobob$4bo3b$2bo5b$obo!', at: [[45, 28]], warm: 160 },
-  ];
-  let seedIdx = Math.floor(Math.random() * SEEDS.length), current = SEEDS[0], gen = 0, pops = [], fade = 1, shown = 0;
-
-  function put(rle, ox, oy, turned) {
-    const cells = []; let x = 0, y = 0, n = '', w = 0, h = 0;
-    for (const ch of rle) {
-      if (ch >= '0' && ch <= '9') { n += ch; continue; }
-      const m = n ? +n : 1; n = '';
-      if (ch === 'b') x += m;
-      else if (ch === '$') { y += m; x = 0; }
-      else if (ch === 'o') { for (let i = 0; i < m; i++) cells.push([x + i, y]); x += m; }
-      else break;
-      w = Math.max(w, x); h = Math.max(h, y + 1);
-    }
-    for (let [cx, cy] of cells) {
-      if (turned) { cx = w - 1 - cx; cy = h - 1 - cy; }       // rotate 180°
-      cur[((oy + cy + H) % H) * W + ((ox + cx + W) % W)] = 1;
-    }
-  }
-  function seed() {
-    cur.fill(0); age.fill(0); glow.fill(0); gen = 0; pops = []; shown = 0;
-    current = SEEDS[seedIdx % SEEDS.length]; seedIdx++;
-    for (const [x, y, turned] of current.at) put(current.rle, x, y, turned);
-  }
-  function step() {
-    for (let y = 0; y < H; y++) {
-      const ym = ((y + H - 1) % H) * W, y0 = y * W, yp = ((y + 1) % H) * W;
-      for (let x = 0; x < W; x++) {
-        const xm = (x + W - 1) % W, xp = (x + 1) % W;
-        const n = cur[ym + xm] + cur[ym + x] + cur[ym + xp] + cur[y0 + xm] + cur[y0 + xp] + cur[yp + xm] + cur[yp + x] + cur[yp + xp];
-        const i = y0 + x, alive = cur[i];
-        const v = (n === 3 || (n === 2 && alive)) ? 1 : 0;
-        nxt[i] = v;
-        if (v) { age[i] = alive ? Math.min(age[i] + 1, 999) : 0; glow[i] = 0; }
-        else { if (alive) glow[i] = 1; else if (glow[i] > 0) glow[i] = Math.max(0, glow[i] - 0.12); age[i] = 0; }
-      }
-    }
-    [cur, nxt] = [nxt, cur];
-    gen++;
-  }
-  // newborn: white-gold; then gold, amber; long-lived structures cool to sea-green
-  function colour(a) {
-    if (gentle) return a < 14 ? '#e7b75a' : a < 40 ? '#9fb98a' : '#4f9fae';   // no white flash for newborns
-    if (a < 1) return '#fff4cf';
-    if (a < 4) return '#f6d98e';
-    if (a < 14) return '#e7b75a';
-    if (a < 40) return '#9fb98a';
-    return '#4f9fae';
-  }
-  function draw() {
-    ctx.fillStyle = '#0e1d30';
-    ctx.fillRect(0, 0, cv.width, cv.height);
-    ctx.globalAlpha = fade;
-    for (let i = 0; i < N; i++) {
-      const x = (i % W) * C, y = ((i / W) | 0) * C;
-      if (cur[i]) { ctx.fillStyle = colour(age[i]); ctx.fillRect(x, y, C - 1, C - 1); }
-      else if (glow[i] > 0 && !gentle) { ctx.fillStyle = 'rgba(201,151,63,' + (glow[i] * 0.45).toFixed(2) + ')'; ctx.fillRect(x, y, C - 1, C - 1); }
-    }
-    ctx.globalAlpha = 1;
-  }
-  function pop() { let p = 0; for (let i = 0; i < N; i++) p += cur[i]; return p; }
-  // Each pattern gets at least 10 seconds and at most 20, counting its fade in and out.
-  // Between those limits it moves on early if the board has gone quiet.
-  const FADE_OUT = () => gentle ? 1.5 : 1.2, FADE_IN = () => gentle ? 1.5 : 0.6;
-  const MIN_SHOW = 10, maxShow = () => 19.8 - FADE_OUT() - FADE_IN();   // a hair under 20 s to allow for frame timing
-  function settled() {
-    pops.push(pop()); if (pops.length > 40) pops.shift();
-    if (shown >= maxShow()) return true;
-    if (shown < MIN_SHOW || pops.length < 40) return false;
-    return Math.max(...pops) - Math.min(...pops) <= 4;
-  }
-
-  // Gentle mode for visitors whose device asks for reduced motion:
-  // slow steady pace, no flashes or glowing trails, long soft fades between patterns.
-  const mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null;
-  let gentle = !!(mq && mq.matches);
-  if (mq) { const onChange = e => { gentle = e.matches; }; mq.addEventListener ? mq.addEventListener('change', onChange) : mq.addListener(onChange); }
-  // In gentle mode, start each pattern partway through its life so the slow pace has something to show
-  function warmUp() { if (gentle) for (let g = 0; g < current.warm; g++) step(); }
-  seed(); warmUp();
-
-  let visible = true, last = 0, acc = 0, ending = false, fast = false, fadingIn = false;
-  if ('IntersectionObserver' in window) new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(cv);
-  const card = cv.closest('.card');
-  if (card) { card.addEventListener('mouseenter', () => fast = true); card.addEventListener('mouseleave', () => fast = false); }
-  function frame(t) {
-    const dt = Math.min(0.1, (t - last) / 1000 || 0); last = t;
-    if (visible) {
-      acc += dt * (gentle ? 4 : fast ? 40 : 18);
-      if (!ending && !fadingIn) shown += dt;
-      while (acc >= 1) { acc -= 1; if (!ending) { step(); if (settled()) ending = true; } }
-      if (!ending && shown >= maxShow()) ending = true;
-      if (ending) { fade -= dt / FADE_OUT(); if (fade <= 0) { seed(); warmUp(); fade = 0; ending = false; fadingIn = true; } }
-      else if (fadingIn) { fade += dt / FADE_IN(); if (fade >= 1) { fade = 1; fadingIn = false; } }
-      draw();
-    }
-    requestAnimationFrame(frame);
-  }
-  draw();
-  requestAnimationFrame(frame);
-})();
-</script>
 <!-- Visit counter (GoatCounter: no cookies, no personal data; localhost is not counted) -->
 <script data-goatcounter="https://captcraig.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
