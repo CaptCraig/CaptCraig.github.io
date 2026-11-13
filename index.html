@@ -408,32 +408,39 @@
   let cur = new Uint8Array(N), nxt = new Uint8Array(N);
   const age = new Uint16Array(N);               // generations alive
   const glow = new Float32Array(N);             // fading trail where a cell just died
+  // Each pattern: where to put it (x, y, turned 180°?) and, for gentle mode, how far into its life to start
+  const GUN = '24bo$22bobo$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o$2o8bo3bob2o4bobo$10bo5bo7bo$11bo3bo$12b2o!';
+  const ACORN = 'bo5b$3bo3b$2o2b3o!';
   const SEEDS = [
-    ['bo5b$3bo3b$2o2b3o!', 1],                                  // acorn
-    ['b2o$2o$bo!', 1],                                          // R-pentomino
-    ['bo5b$3bo3b$2o2b3o!', 2],                                  // two acorns
-    ['24bo$22bobo$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o$2o8bo3bob2o4bobo$10bo5bo7bo$11bo3bo$12b2o!', 1], // Gosper gun
-    ['6bob$4bob2o$4bobob$4bo3b$2bo5b$obo!', 1],                 // switch engine
+    { name: 'acorn',         rle: ACORN, at: [[45, 28]],                 warm: 160 },
+    { name: 'R-pentomino',   rle: 'b2o$2o$bo!', at: [[45, 28]],          warm: 160 },
+    { name: 'two acorns',    rle: ACORN, at: [[24, 18], [64, 38]],       warm: 160 },
+    { name: 'Gosper gun',    rle: GUN,   at: [[6, 5]],                   warm: 160 },
+    { name: 'duelling guns', rle: GUN,   at: [[4, 4], [46, 36, true]],   warm: 60 },   // streams meet head-on near gen 115
+    { name: 'switch engine', rle: '6bob$4bob2o$4bobob$4bo3b$2bo5b$obo!', at: [[45, 28]], warm: 160 },
   ];
-  let seedIdx = Math.floor(Math.random() * SEEDS.length), gen = 0, pops = [], fade = 1;
+  let seedIdx = Math.floor(Math.random() * SEEDS.length), current = SEEDS[0], gen = 0, pops = [], fade = 1, shown = 0;
 
-  function put(rle, ox, oy) {
-    let x = 0, y = 0, n = '';
+  function put(rle, ox, oy, turned) {
+    const cells = []; let x = 0, y = 0, n = '', w = 0, h = 0;
     for (const ch of rle) {
       if (ch >= '0' && ch <= '9') { n += ch; continue; }
       const m = n ? +n : 1; n = '';
       if (ch === 'b') x += m;
       else if (ch === '$') { y += m; x = 0; }
-      else if (ch === 'o') { for (let i = 0; i < m; i++) cur[((oy + y + H) % H) * W + ((ox + x + i + W) % W)] = 1; x += m; }
+      else if (ch === 'o') { for (let i = 0; i < m; i++) cells.push([x + i, y]); x += m; }
       else break;
+      w = Math.max(w, x); h = Math.max(h, y + 1);
+    }
+    for (let [cx, cy] of cells) {
+      if (turned) { cx = w - 1 - cx; cy = h - 1 - cy; }       // rotate 180°
+      cur[((oy + cy + H) % H) * W + ((ox + cx + W) % W)] = 1;
     }
   }
   function seed() {
-    cur.fill(0); age.fill(0); glow.fill(0); gen = 0; pops = [];
-    const [rle, count] = SEEDS[seedIdx % SEEDS.length]; seedIdx++;
-    if (count === 2) { put(rle, 24, 18); put(rle, 64, 38); }
-    else if (rle.length > 60) put(rle, 6, 5);
-    else put(rle, 45, 28);
+    cur.fill(0); age.fill(0); glow.fill(0); gen = 0; pops = []; shown = 0;
+    current = SEEDS[seedIdx % SEEDS.length]; seedIdx++;
+    for (const [x, y, turned] of current.at) put(current.rle, x, y, turned);
   }
   function step() {
     for (let y = 0; y < H; y++) {
@@ -453,6 +460,7 @@
   }
   // newborn: white-gold; then gold, amber; long-lived structures cool to sea-green
   function colour(a) {
+    if (gentle) return a < 14 ? '#e7b75a' : a < 40 ? '#9fb98a' : '#4f9fae';   // no white flash for newborns
     if (a < 1) return '#fff4cf';
     if (a < 4) return '#f6d98e';
     if (a < 14) return '#e7b75a';
@@ -466,33 +474,44 @@
     for (let i = 0; i < N; i++) {
       const x = (i % W) * C, y = ((i / W) | 0) * C;
       if (cur[i]) { ctx.fillStyle = colour(age[i]); ctx.fillRect(x, y, C - 1, C - 1); }
-      else if (glow[i] > 0) { ctx.fillStyle = 'rgba(201,151,63,' + (glow[i] * 0.45).toFixed(2) + ')'; ctx.fillRect(x, y, C - 1, C - 1); }
+      else if (glow[i] > 0 && !gentle) { ctx.fillStyle = 'rgba(201,151,63,' + (glow[i] * 0.45).toFixed(2) + ')'; ctx.fillRect(x, y, C - 1, C - 1); }
     }
     ctx.globalAlpha = 1;
   }
   function pop() { let p = 0; for (let i = 0; i < N; i++) p += cur[i]; return p; }
-  // reseed when the board has settled down (or after a long run)
+  // Each pattern gets at least 10 seconds and at most 20, counting its fade in and out.
+  // Between those limits it moves on early if the board has gone quiet.
+  const FADE_OUT = () => gentle ? 1.5 : 1.2, FADE_IN = () => gentle ? 1.5 : 0.6;
+  const MIN_SHOW = 10, maxShow = () => 19.8 - FADE_OUT() - FADE_IN();   // a hair under 20 s to allow for frame timing
   function settled() {
-    pops.push(pop()); if (pops.length > 90) pops.shift();
-    if (gen > 1600) return true;
-    if (gen < 200 || pops.length < 90) return false;
-    return Math.max(...pops) - Math.min(...pops) <= 6;
+    pops.push(pop()); if (pops.length > 40) pops.shift();
+    if (shown >= maxShow()) return true;
+    if (shown < MIN_SHOW || pops.length < 40) return false;
+    return Math.max(...pops) - Math.min(...pops) <= 4;
   }
 
-  seed();
-  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) { for (let g = 0; g < 450; g++) step(); draw(); return; }
+  // Gentle mode for visitors whose device asks for reduced motion:
+  // slow steady pace, no flashes or glowing trails, long soft fades between patterns.
+  const mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null;
+  let gentle = !!(mq && mq.matches);
+  if (mq) { const onChange = e => { gentle = e.matches; }; mq.addEventListener ? mq.addEventListener('change', onChange) : mq.addListener(onChange); }
+  // In gentle mode, start each pattern partway through its life so the slow pace has something to show
+  function warmUp() { if (gentle) for (let g = 0; g < current.warm; g++) step(); }
+  seed(); warmUp();
 
-  let visible = true, last = 0, acc = 0, ending = false, fast = false;
+  let visible = true, last = 0, acc = 0, ending = false, fast = false, fadingIn = false;
   if ('IntersectionObserver' in window) new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(cv);
   const card = cv.closest('.card');
   if (card) { card.addEventListener('mouseenter', () => fast = true); card.addEventListener('mouseleave', () => fast = false); }
   function frame(t) {
     const dt = Math.min(0.1, (t - last) / 1000 || 0); last = t;
     if (visible) {
-      acc += dt * (fast ? 40 : 18);
+      acc += dt * (gentle ? 4 : fast ? 40 : 18);
+      if (!ending && !fadingIn) shown += dt;
       while (acc >= 1) { acc -= 1; if (!ending) { step(); if (settled()) ending = true; } }
-      if (ending) { fade -= dt / 1.2; if (fade <= 0) { seed(); fade = 1; ending = false; } }
+      if (!ending && shown >= maxShow()) ending = true;
+      if (ending) { fade -= dt / FADE_OUT(); if (fade <= 0) { seed(); warmUp(); fade = 0; ending = false; fadingIn = true; } }
+      else if (fadingIn) { fade += dt / FADE_IN(); if (fade >= 1) { fade = 1; fadingIn = false; } }
       draw();
     }
     requestAnimationFrame(frame);
